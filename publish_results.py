@@ -4,13 +4,13 @@ import os
 def publish_results():
     client = testrail_api.TestRailAPI(
         ['https://swe401pro.testrail.io'],
-        os.environ['gr.eg.or.ymj.en.son6@gmail.com'],
-        os.environ['aPAgZT6rynaBWwcJA48W-EK89Ugq/Qdsv6pBZeL2B']
+        ['gr.eg.or.ymj.en.son6@gmail.com'],
+        ['aPAgZT6rynaBWwcJA48W-EK89Ugq/Qdsv6pBZeL2B']
     )
 
-    project_id = os.environ['1']
+    project_id = ['1']
 
-    run_id = os.environ['TESTRAIL_RUN_ID']
+    run_id = ['TESTRAIL_RUN_ID']
 
     test_results = {
         'CT': {

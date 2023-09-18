@@ -29,5 +29,6 @@ def publish_results():
             f'add_result_for_case/{run_id}/{case_id}',
             result
         )
-
+        
+if __name__ == "__main__":
     publish_results()

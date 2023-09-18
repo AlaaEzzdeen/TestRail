@@ -3,9 +3,9 @@ import os
 
 def publish_results():
     client = testrail_api.TestRailAPI(
-        ['https://swe401pro.testrail.io'],
-        ['gr.eg.or.ymj.en.son6@gmail.com'],
-        ['aPAgZT6rynaBWwcJA48W-EK89Ugq/Qdsv6pBZeL2B']
+        url=['https://swe401pro.testrail.io'],
+        email=['gr.eg.or.ymj.en.son6@gmail.com'],
+        password=['aPAgZT6rynaBWwcJA48W-EK89Ugq/Qdsv6pBZeL2B']
     )
 
     project_id = ['1']

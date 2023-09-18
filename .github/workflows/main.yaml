@@ -1,28 +1,31 @@
 name: Test and Publish Results to TestRail
 
-on:
-  push:
-    branches:
-      - main
-
+on: [workflow_dispatch]
 jobs:
-  test-and-publish:
+  send-test-results-to-testrail:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
-
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Run tests and publish results
+      - name: Execute automated tests
+        run: python test.py
+      - name: Python setup
+        if: always()
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+      - name: TestRail CLI upload results
+        if: always()
         run: |
-          python test.py
-          pip install testrail-api
-          python publish_results.py
+          pip install trcli
+          trcli -y \
+            -h https://swe401pro.io/ \
+            --project "SWE 401" \
+            -u gr.eg.or.ymj.en.son6@gmail.com \
+            -p TestRail*1 \
+            parse_junit \
+            --title "Automated Tests from GitHub workflow" \
+            --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
+            -f "junit-report.xml"

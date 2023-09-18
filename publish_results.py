@@ -12,7 +12,7 @@ testrail_password = 'StarTrail*1'
 owner = 'AlaaEzzdeen'
 repo = 'https://github.com/AlaaEzzdeen/TestRail'
 
-# TestRail project and suite IDs
+# TestRail project and suite ID
 project_id = 1
 suite_id = 1
 

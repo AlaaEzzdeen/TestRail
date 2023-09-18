@@ -30,11 +30,12 @@ for action in actions:
     action_id = action['id']
     action_name = action['name']
     action_status = action['status']
-
-    # Create a new test case in TestRail
-    case = client.create_case(project_id, suite_id, action_name, action_name)
-
-    # Set the custom case fields based on the GitHub action information
-    client.update_case(case['id'], {'custom_action_id': action_id, 'custom_action_status': action_status})
+    case_payload = {
+        'title': action_name,
+        'suite_id': suite_id,
+        'custom_action_id': action_id,
+        'custom_action_status': action_status
+    }
+    case = client.send_post(f'add_case/{project_id}', case_payload)
 
     print(f"Test case created: {case['title']}")

@@ -24,11 +24,10 @@ jobs:
         run: |
           pip install trcli
           trcli -y \
-          -h https://swe401pro.io/ \
-          --project "SWE 401" \
-          -u gr.eg.or.ymj.en.son6@gmail.com \
-          -p TestRail*1 \
-          add_results_for_cases \
-          --title "Automated Tests from GitHub workflow" \
-          --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
+          -h https://www.testrail.com/ \
+          --project "Your Project" \
+          -u your_username \
+          -p your_password \
+          add_results \
+          --testrun-id 1234 \
           --results-file results.json

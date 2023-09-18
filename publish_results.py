@@ -37,4 +37,4 @@ for action in actions:
         'custom_action_status': action_status
     }
     
-    print(f"Test case created: {case['title']}")
+    print(f"Test case created: {case_payload['title']}")

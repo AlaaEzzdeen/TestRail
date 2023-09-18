@@ -1,34 +1,40 @@
+import requests
 import testrail_api
-import os
 
-def publish_results():
-    client = testrail_api.TestRailAPI(
-        url=['https://swe401pro.testrail.io'],
-        email=['gr.eg.or.ymj.en.son6@gmail.com'],
-        password=['aPAgZT6rynaBWwcJA48W-EK89Ugq/Qdsv6pBZeL2B']
-    )
+# GitHub API endpoint to get recent actions
+github_api_url = 'https://api.github.com/repos/AlaaEzzdeen/TestRail/actions/runs'
 
-    project_id = ['1']
+# TestRail API endpoint and credentials
+testrail_url = 'https://swe401pro.testrail.io/'
+testrail_user = 'gr.eg.or.ymj.en.son6@gmail.com'
+testrail_password = 'StarTrail*1'
 
-    run_id = ['TESTRAIL_RUN_ID']
+# GitHub repository information
+owner = 'AlaaEzzdeen'
+repo = 'https://github.com/AlaaEzzdeen/TestRail'
 
-    test_results = {
-        'CT': {
-            'status_id': 1, 
-            'comment': 'Test passed successfully.'
-        },
-        'CF': {
-            'status_id': -1,
-            'comment': 'Test failed due to assertion error.'
-        }
-    }
+# TestRail project and suite IDs
+project_id = 1
+suite_id = 1
 
+# Fetch recent actions from GitHub
+response = requests.get(github_api_url.format(owner=owner, repo=repo))
+actions = response.json().get('workflow_runs', [])
 
-    for case_id, result in test_results.items():
-        client.send_post(
-            f'add_result_for_case/{run_id}/{case_id}',
-            result
-        )
-        
-if __name__ == "__main__":
-    publish_results()
+# Initialize TestRail API client
+client = testrail_api.TestRailAPI(testrail_url, testrail_user, testrail_password)
+
+# Create test cases in TestRail
+for action in actions:
+    # Extract relevant information
+    action_id = action['id']
+    action_name = action['name']
+    action_status = action['status']
+
+    # Create a new test case in TestRail
+    case = client.create_case(project_id, suite_id, action_name, action_name)
+
+    # Set the custom case fields based on the GitHub action information
+    client.update_case(case['id'], {'custom_action_id': action_id, 'custom_action_status': action_status})
+
+    print(f"Test case created: {case['title']}")

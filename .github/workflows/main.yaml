@@ -1,6 +1,9 @@
 name: Test and Publish Results to TestRail
 
-on: [workflow_dispatch]
+on: 
+  push:
+    branches:
+      - main
 jobs:
   send-test-results-to-testrail:
     runs-on: ubuntu-latest

@@ -4,7 +4,6 @@ import testrail_api
 
 github_api_url = 'https://api.github.com/repos/AlaaEzzdeen/TestRail/actions/runs'
 
-# TestRail API endpoint and credentials
 testrail_url = 'https://swe401pro.testrail.io/'
 testrail_user = 'gr.eg.or.ymj.en.son6@gmail.com'
 testrail_password = 'StarTrail*1'

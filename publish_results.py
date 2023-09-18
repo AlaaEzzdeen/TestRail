@@ -1,7 +1,7 @@
 import requests
 import testrail_api
 
-# GitHub API endpoint to get recent actions
+
 github_api_url = 'https://api.github.com/repos/AlaaEzzdeen/TestRail/actions/runs'
 
 # TestRail API endpoint and credentials

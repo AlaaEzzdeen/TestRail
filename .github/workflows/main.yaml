@@ -25,7 +25,6 @@ jobs:
             --project "SWE 401" \
             -u gr.eg.or.ymj.en.son6@gmail.com \
             -p TestRail*1 \
-            parse_junit \
+            parse_console \
             --title "Automated Tests from GitHub workflow" \
-            --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
-            -f "junit-report.xml"
+            --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

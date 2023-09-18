@@ -1,19 +1,28 @@
 import unittest
 import json
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        # Your test logic here
-        result = 42  # Replace with your actual test result
-        self.assertEqual(result, 42)  # Replace with your actual test assertion
-
-    def test_another_thing(self):
-        # Your test logic here
-        result = "success"  # Replace with your actual test result
-        self.assertEqual(result, "success")  # Replace with your actual test assertion
+class AdditionTest(unittest.TestCase):
+    def test_addition(self):
+        # Test addition operation
+        result = 2 + 2
+        expected = 4
+        self.assertEqual(result, expected)
 
 if __name__ == '__main__':
     # Run the tests and save the results to a JSON file
-    test_results = unittest.main(exit=False).result.json_results()
+    test_results = unittest.main(
+        module=None,
+        argv=[''],
+        exit=False,
+        testRunner=unittest.TextTestRunner(resultclass=unittest.TestResult),
+    ).result
+
+    # Convert the test results to a JSON format
+    json_results = []
+    for test_case in test_results.errors + test_results.failures:
+        test_name = test_case[0]._testMethodName
+        error_message = str(test_case[1])
+        json_results.append({"test_name": test_name, "error_message": error_message})
+
     with open('results.json', 'w') as file:
-        json.dump(test_results, file)
+        json.dump(json_results, file)

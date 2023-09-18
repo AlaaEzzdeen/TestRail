@@ -2,7 +2,7 @@ import testrail_api
 import os
 
 def publish_results():
-    client = testrail_api.TestRail(
+    client = testrail_api.TestRailAPI(
         os.environ['https://swe401pro.testrail.io'],
         os.environ['gr.eg.or.ymj.en.son6@gmail.com'],
         os.environ['aPAgZT6rynaBWwcJA48W-EK89Ugq/Qdsv6pBZeL2B']
@@ -30,5 +30,4 @@ def publish_results():
             result
         )
 
-if __name__ == '__main__':
     publish_results()

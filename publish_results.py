@@ -36,6 +36,5 @@ for action in actions:
         'custom_action_id': action_id,
         'custom_action_status': action_status
     }
-    case = client.send_post(f'add_case/{project_id}', case_payload)
-
+    
     print(f"Test case created: {case['title']}")
